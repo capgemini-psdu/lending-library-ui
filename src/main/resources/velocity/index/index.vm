@@ -1,0 +1,38 @@
+#parse("/velocity/govuk_layout.vm")
+#@mainLayout()
+<div class="grid-row">
+	<div class="column-two-thirds">
+		<h1 class="heading-xlarge">Lending Library</h1>
+		<p class="lede">Welcome to the national GOV.UK Lending Library service.</p>
+		<div class="panel panel-border-wide">
+			<p>$msg.get("INDEX_REGISTERED_USERS", $users.size())</p>
+			<ul class="list list-bullet">
+				#foreach($user in $users)
+					<li>$user</li>
+				#end
+			</ul>
+			<p>$msg.get("INDEX_PASSWORD_INFO")</p>
+		</div>
+	</div>
+	<div class="column-one-third">
+	    <p>
+	    	#if($currentUser)
+	    		<div id="global-header-bar"></div>
+	    		<h4 class="heading-small"> 
+    				Welcome, $currentUser.getFirstName() $currentUser.getLastName()
+				</h3>
+	    		<p>$msg.get("SIGNIN_AUTH_SUCCEEDED", $currentUser.getUsername())</p>
+				<p>Last sign in on $lastSignin</p>
+				<details>
+					<summary>
+						<span class="summary">Not right?</span>		
+					</summary>	
+					<div class="panel panel-border-narrow">	
+						<p>Contact us if it wasn't you.</p>
+					</div>
+				</details
+			#end
+		</p>
+	</div>
+</div>
+#end
