@@ -30,3 +30,12 @@ If you have Gradle installed on your target machine then you can use that to bui
 `gradle build`
 
 `gradle run`
+
+## API back-end
+The UI application makes API calls to an API application, deployed separately, to retrieve the book information.
+
+By default the UI application expects to find the API application on localhost:5678.
+
+If you want to use a different location for the API application then set the API_LOCATION environment variable accordingly e.g.:
+
+`export API_LOCATION=localhost:8080`

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.ConnectException;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.http.client.fluent.Request;
 
 import com.google.common.collect.Lists;
@@ -12,10 +13,14 @@ import app.util.JsonUtil;
 
 public class BookDao {
 
+    private String envVarApiLocation = System.getenv("API_LOCATION");
+    
     public Iterable<Book> getAllBooks() throws ConnectException {
         String json = null;
         try {
-            json = Request.Get("http://localhost:5678/books").setHeader("Accept", "application/json")
+            String apiLocation = StringUtils.isEmpty(envVarApiLocation) ? "localhost:5678" : envVarApiLocation;
+            json = Request.Get(String.format("http://%s/books", apiLocation))
+                .setHeader("Accept", "application/json")
                 .connectTimeout(1000)
                 .socketTimeout(1000)
                 .execute().returnContent().asString();
